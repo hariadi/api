@@ -52,6 +52,10 @@ $app->get('/docs', function () use ($app) {
   // get type of document: pp, spp or se
   $request = $app->request();
   $config = $app->config('custom');
+  $assetUri = $app->request()->getRootUri();
+  $app->view()->appendData(array(
+      'assetUri' => $assetUri
+  ));
   
   $cari = $request->get('term');
   $jenis = $request->get('type');
@@ -106,7 +110,8 @@ $app->get('/docs', function () use ($app) {
   switch ($format) {
     case "html":
       echo "Senarai $jenis HTML";
-      $app->render('index.html');
+      $app->render('slim.html.twig');
+      //print_r($app->view());
       break;
     default:
       echo "Senarai $jenis JSON";
