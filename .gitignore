@@ -1,4 +1,5 @@
 /vendor/
+/SlimPackage/
 /logs/*
 !/logs/README.md
 /templates/cache/*
