@@ -1,21 +1,19 @@
-# Slim Framework Skeleton Application
+# Dokumen Jabatan Perkhidmatan Awam REST ful API 
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework application. This application uses the latest Slim and Slim-Extras repositories. It also uses Sensio Labs' [Twig](http://twig.sensiolabs.org) template library.
+Senarai kod pustaka yang digunakan oleh aplikasi ini:
+ * [Slim Framework](https://github.com/codeguy/Slim) - Framework
+ * [Twig](https://github.com/fabpot/Twig) - Templating
+ * [Fluent PDO](https://github.com/lichtner/fluentpdo) - Pengurusan DB 
+ 
+Pengurusan aplikasi API menggunakan Composer bagi membolehkan konfigurasi dapat digunakan dengan cepat dan mudah.
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+## Pemasangan Composer
 
-## Install Composer
-
-If you have not installed Composer, do that now. I prefer to install Composer globally in `/usr/local/bin`, but you may also install Composer locally in your current working directory. For this tutorial, I assume you have installed Composer locally.
+Composer merupakan pengurusan kebergantungan kod pustaka untuk PHP.
 
 <http://getcomposer.org/doc/00-intro.md#installation>
 
-## Install the Application
+## Pemasangan Aplikasi
 
-After you install Composer, run this command from the directory in which you want to install your new Slim Framework application.
-
-    php composer.phar create-project slim/slim-skeleton [my-app-name]
-
-Replace <code>[my-app-name]</code> with the desired directory name for your new application. You'll want to point your virtual host document root to your new application's `public/` directory.
-
-That's it! Now go build something cool.
+ 1. Clone repo: `git clone https://github.com/hariadi/api.git`.
+ 2. `cd api && composer install`
