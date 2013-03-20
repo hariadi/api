@@ -31,32 +31,22 @@ $app->get('/', function () use ($app) {
     $app->render('index.html');
 });
 
+
 // Define routes for API request
-//$app->get('/pp(/)(/:tahun/?(/:kategori/?(/:teras/?)))', 'getPP');
-//$app->get('/spp(/)(/:tahun/?(/:kategori/?(/:teras/?)))', 'getSPP');
-//$app->get('/se(/)(/:tahun/?(/:kategori/?(/:teras/?)))', 'getSE');
-
-$app->get('/cari/:query', function () {
-    //$app->render('search.html');
-});
-/*
-$app->get('/docs/?(/:tahun/?(/:kategori/?(/:teras/?)))', function ($type = 'pp', $tahun = null, $kategori = null, $teras = null) use ($app) {
-  // get type of document: pp, spp or se
-  $type = ($type === 'se') ? 3 : (($type === 'spp') ? 2 : 1); //default to 1 (pp)
-  
-  echo "Senarai $type";
-});
-*/
-
 $app->get('/docs', function () use ($app) {
   // get type of document: pp, spp or se
   $request = $app->request();
+  
+  // get site and db config
   $config = $app->config('custom');
+  
+  // inject assets uri
   $assetUri = $app->request()->getRootUri();
   $app->view()->appendData(array(
       'assetUri' => $assetUri
   ));
   
+  // Get Querystring parameters
   $cari = $request->get('term');
   $jenis = $request->get('type');
   $tahun = $request->get('year');
@@ -109,12 +99,23 @@ $app->get('/docs', function () use ($app) {
   
   switch ($format) {
     case "html":
+      
       echo "Senarai $jenis HTML";
       $app->render('slim.html.twig');
       //print_r($app->view());
       break;
     default:
-      echo "Senarai $jenis JSON";
+      $res = $app->response();
+      $res['Content-Type'] = 'application/json';
+      $res['X-API-Version'] = '1.0';
+      
+      if (empty($document)) {
+        echo json_encode(array('204' => 'No Content'));
+      } else {
+        $result['result'] = $document;
+        //echo json_encode($result);
+        print_r($result);
+      }
       break;
   }
   
