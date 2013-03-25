@@ -16,6 +16,7 @@ $app = new \Slim\Slim(array(
 
 $app->setName('API');
 
+
 // Prepare view
 \Slim\Extras\Views\Twig::$twigOptions = array(
     'charset' => 'utf-8',
@@ -53,6 +54,7 @@ $app->get('/docs', function () use ($app) {
   $kategori = $request->get('cat');
   $teras = $request->get('core');
   $format = $request->get('format');
+  $callback = $request->get('callback');
   
   // pagination
   $page = $request->get('page');
@@ -102,7 +104,6 @@ $app->get('/docs', function () use ($app) {
       
       echo "Senarai $jenis HTML";
       $app->render('slim.html.twig');
-      //print_r($app->view());
       break;
     default:
       $res = $app->response();
@@ -113,36 +114,17 @@ $app->get('/docs', function () use ($app) {
         echo json_encode(array('204' => 'No Content'));
       } else {
         $result['result'] = $document;
-        //echo json_encode($result);
-        print_r($result);
+        // support callback for jsonp
+        if (!empty($callback)) {
+          $res['Content-Type'] = 'application/javascript';
+          echo htmlspecialchars($callback) . '(' . json_encode($result) . ');';
+        } else {
+          echo json_encode($result);
+        }
       }
       break;
   }
-  
-  //print_r($document);
-  
-  
 });
-
 
 // Run app
 $app->run();
-
-
-
-function getJenis() {
-
-  $type = isset($_GET['type']) ? htmlEntities($_GET['type'], ENT_QUOTES) : 1;
-  $type = isset($type) ? (($type === 'pp') ? 1 : (($type === 'spp') ? 2 : 3)) : 1;  // pp: 1, spp: 2, se: 3
-
-  
-   $fpdo = new FluentPDO(getConnection());
-  $query = $fpdo->from('dokumen');
-  $document = $query->fetchAll();
-  
-  if (!isset($_GET['callback'])) {
-    echo json_encode($document);
-  } else {
-    echo $_GET['callback'] . '(' . json_encode($document) . ');';
-  }
-}
