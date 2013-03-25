@@ -190,12 +190,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/XaminProject/handlebars.php.git",
-                "reference": "89f0c007908f80e4e3385dc0841956a40c87cf9a"
+                "reference": "e6b4182a753f0386c4100d51754dbc6aa0931590"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/XaminProject/handlebars.php/zipball/89f0c007908f80e4e3385dc0841956a40c87cf9a",
-                "reference": "89f0c007908f80e4e3385dc0841956a40c87cf9a",
+                "url": "https://api.github.com/repos/XaminProject/handlebars.php/zipball/e6b4182a753f0386c4100d51754dbc6aa0931590",
+                "reference": "e6b4182a753f0386c4100d51754dbc6aa0931590",
                 "shasum": ""
             },
             "type": "library",
@@ -216,7 +216,7 @@
             ],
             "description": "Handlebars processor for php",
             "homepage": "https://github.com/XaminProject/handlebars.php",
-            "time": "2013-03-16 07:23:16"
+            "time": "2013-03-18 20:25:37"
         }
     ],
     "packages-dev": [
